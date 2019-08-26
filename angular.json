@@ -24,9 +24,55 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+                    
+              "src/assets/css/normalize.css",
+              "src/assets/css/bootstrap.min.css",
+              "src/assets/css/font-awesome.min.css",
+              "src/assets/css/themify-icons.css",
+              "src/assets/css/pe-icon-7-filled.css",
+              "src/assets/calendar/fullcalendar.css",
+              "src/assets/css/charts/chartist.min.css",
+              "src/assets/css/datepicker.css",
+              "src/assets/css/animate.css",
+              "src/assets/css/snackbar.min.css",
+              "src/assets/css/select2.min.css",
+              "src/assets/css/dataTables.bootstrap.min.css",
+              "src/assets/css/fileinput.css",
+              "src/assets/css/fileinputtheme.css",
+              "src/assets/css/timepicker.css",
+              "src/assets/css/style.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/vendor/jquery-2.1.4.min.js",
+              "src/assets/js/popper.min.js",
+              "src/assets/js/plugins.js",
+              "src/assets/js/datepicker.js",
+              "src/assets/js/lib/validation/jquery.validate.min.js",
+              "src/assets/js/jquery.nicescroll.min.js",
+              "src/assets/js/jquery.dataTables.min.js",
+              "src/assets/js/dataTables.bootstrap.min.js",
+
+              "src/assets/js/toast.js",
+              "src/assets/js/lib/moment/moment.js",
+              "src/assets/js/select.js",
+              "src/assets/js/industryfetchjson.js",
+              "src/assets/js/select.js",
+              "src/assets/js/fileinput.js",
+              "src/assets/js/fileinputtheme.js",
+              "src/assets/js/fileinputtheme2.js",
+              "src/assets/js/timepicker.js",
+              "src/assets/js/toast.js",
+              "src/assets/js/shared.js",
+              "src/assets/js/login.js",
+              "src/assets/js/signup.js",
+              "src/assets/js/main.js",
+              "src/assets/js/comp.js",
+              "src/assets/js/dyload.js",
+              "src/assets/js/ticket.js",
+              "src/assets/js/timer.js",
+              "src/assets/js/time.js"
+
+            ]
           },
           "configurations": {
             "production": {

@@ -1,0 +1,246 @@
+
+    <app-left></app-left>   
+    <div id="right-panel" class="right-panel">
+        <app-header></app-header> 
+        <div class="content pb-0">
+            <h2 class="mb-4">Dashboard</h2>
+            <div class="row  ">
+                <div class="col-xl-8">
+                    <div class="row">
+                        <div class="col-xl-12 ">
+                            <div class="row top-count-box">
+                                <div class="col-lg-4 col-sm-4">
+                                    <div class="card">
+                                        <a href="/projects">
+                                            <div class="card-body">
+                                                <div class="stat-widget-five">
+                                                    <div class="stat-icon dib " style="background: #1b91d6;">
+                                                        <i class="pe-7f-browser"></i>
+                                                    </div>
+                                                    <div class="stat-content">
+                                                        <div class="text-left dib">
+
+                                                            <div class="stat-text">
+                                                                <span class="count totalPrj-count">{{prj_total}}</span>
+                                                            </div>
+                                                            <div class="text-muted text-uppercase font-weight-bold">Projects</div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-4">
+                                    <div class="card">
+                                        <a href="/users">
+                                            <div class="card-body">
+                                                <div class="stat-widget-five">
+                                                    <div class="stat-icon dib flat-color-4"
+                                                         style="background: #e56a2b;">
+                                                        <i class="pe-7f-users"></i>
+                                                    </div>
+                                                    <div class="stat-content">
+                                                        <div class="text-left dib">
+
+                                                            <div class="stat-text">
+                                                                <span class="count totalUser-count">{{user_total}}</span>
+                                                            </div>
+                                                            <div class="text-muted text-uppercase font-weight-bold">Users</div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-4">
+                                    <div class="card">
+                                        <a href="/ticketDashboard">
+                                            <div class="card-body">
+                                                <div class="stat-widget-five">
+                                                    <div class="stat-icon dib flat-color-1 "
+                                                         style="background: #3fbb68;">
+                                                        <i class="pe-7f-cash"></i>
+                                                    </div>
+                                                    <div class="stat-content">
+                                                        <div class="text-left dib">
+
+                                                            <div class="stat-text">
+                                                                <span class="count">{{tkt_total}}</span>
+                                                            </div>
+                                                            <div class="text-muted text-uppercase font-weight-bold">Tickets</div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col-xl-12">
+                            <div class="card">
+                                <div class="card-title">
+                                    <h4 class="box-title">Projects</h4>
+                                    <div class="dropdown for-addnew btn-right-detail"
+                                         style="cursor: pointer;">
+                                        <span data-toggle="dropdown" aria-haspopup="true"
+                                              aria-expanded="false" title="Project Action">
+                                            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                        </span>
+                                        <div class="add-menu dropdown-menu ">
+                                            <a class="nav-link" href="javascript:void(0);"
+                                               id="gridproject">
+                                                <i class="fa fa-th-large"
+                                                   aria-hidden="true"></i>Grid View
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body project">
+
+
+                                    <p class=" justify-content-center pb-2"
+                                       style="height: 245px; text-align: center;color: #d3d3d3;text-align:center">
+                                        <i>No project is assigned</i>
+                                    </p>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4">
+                    <div class="card top-count-box">
+                        <div class="card-title">
+                            <h4 class="box-title">
+                                <a href="${pageContext.request.contextPath}/home/tickets/TicketDashboard"
+                                   style="color: #212529;">Tickets</a>
+                            </h4>
+                            <div class="dropdown for-addnew btn-right-detail"
+                                 style="cursor: pointer;">
+                                <span data-toggle="dropdown" aria-haspopup="true"
+                                      aria-expanded="false" title="Ticket">
+                                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                </span>
+                                <div class="add-menu dropdown-menu">
+                                    <a class="nav-link"
+                                       href="${pageContext.request.contextPath}/home/tickets/TicketDashboard">
+                                        <i class="fa fa-th-list" aria-hidden="true"></i>All Tickets
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-height">
+                                <canvas id="myChart"
+                                        style="height: 240px !important; width: 95% !important; margin: auto;"></canvas>
+                            </div>
+                            <ul class="list-no-style list-verticals chart-description-list">
+                                <li>
+                                    <i class="fa fa-square-o "
+                                       style="background-color: #ffc107" aria-hidden="true"></i>Open<span class="pull-right count_tktopen"></span>
+                                </li>
+                                <li>
+                                    <i class="fa fa-square-o "
+                                       style="background-color: #17a2b8" aria-hidden="true"></i>In
+                                    Progress<span class="pull-right count_tktprog"></span>
+                                </li>
+                                <li>
+                                    <i class="fa fa-square-o "
+                                       style="background-color: #dc3545" aria-hidden="true"></i>On
+                                    Hold<span class="pull-right count_tkthold"></span>
+                                </li>
+                                <li>
+                                    <i class="fa fa-square-o"
+                                       style="background-color: #343a40" aria-hidden="true"></i>Close<span class="pull-right count_tktclose"></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="row">
+                <div class="col-xl-6">
+                    <div class="card ">
+                        <div class="card-title" style="margin-bottom: 0px">
+                            <h4 class="box-title">Tickets</h4>
+                        </div>
+
+                        <div class="card-body--" style="margin-right: -1px">
+                            <div class="table-stats order-table ov-h">
+
+                                <p id="no-ticket-msg" style="color: #d3d3d3;padding: 1.7em;text-align:center">
+                                    <i>No ticket is assigned</i>
+
+                                </p>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="card">
+                        <div class="card-title">
+                            <h4 class="box-title">Recent Activity</h4>
+                        </div>
+                        <div class="card-body">
+
+                            <ul class="bullet-line-list">
+
+
+                                <li>
+                                    <span></span>
+
+                                    <h6>Krishna Hukkeri</h6>
+
+                                    <p class="mb-0">Working on tempalte engine</p>
+                                </li>
+
+                                <li>
+                                    <h6>Malashree Polo</h6>
+
+                                    <p class="mb-0">Working on Hana connection</p>
+                                <li>
+
+                                    <h6>Abel Pratley</h6>
+
+                                    <p class="mb-0">Working on db operation</p>
+
+
+
+
+                                </li>
+
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+            </div>
+
+            
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="lds-facebook">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div class="modal-container"></div>
+    
