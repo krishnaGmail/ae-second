@@ -4,18 +4,9 @@ $.noConflict();
 var const_url = '/vsurvedevkh3';
 
 jQuery(document).ready(function ($) {
-    
+	
 	"use strict";
-    $('.form-control').each(function () {
-        $(this).on('blur', function () {
-            if ($(this).val().trim() != "") {
-                $(this).addClass('has-val');
-            }
-            else {
-                $(this).removeClass('has-val');
-            }
-        })
-    });
+    
 	//Validation for accepting only letters in the first name and last nane field
 	jQuery.validator.addMethod("lettersonly",function(value,element){
 		return this.optional(element) || /^[a-z ]+$/i.test(value);
@@ -99,21 +90,8 @@ jQuery(document).ready(function ($) {
 		 });
 	}
 			
-	//ellipse
-	function ellipse(){
-		var divs = $(".wrapellipse");
-		var showChar = 30;
-		var ellipsestext = "...";
-		$(divs).each(function() {
-			var content = $(this).html();				
-			if(content.length > showChar) {		
-				var c = content.substr(0, showChar);
-				var html = c + ' ' + ellipsestext+ '  ';
-				$(this).html(html); 
-			}
-		});
-	}
-	ellipse();
+	
+
 	
 	//checbox switch
 	$.fn.checkboxChk = function () {

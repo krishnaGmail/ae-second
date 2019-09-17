@@ -1,14 +1,36 @@
-﻿
+
 jQuery(document).ready(function ($) {
+    var options = {
+                           
+        enableSounds: false
+        
+       
+    };
+    window.toast = new Toasty(options);
+    // or this public method:
+    toast.configure(options);
     $(".user-menu").niceScroll();
+    $.hasClassadd=function(){
+            $('.form-control').each(function () {
+            $(this).on('blur', function () {
+                if ($(this).val().trim() != "") {
+                    
+                    $(this).addClass('has-val');
+                }
+                else {
+                    $(this).removeClass('has-val');
+                }
+            })
+        });
+    };
     $.ellipse=function ellipse() {
         var divs = $(".wrapellipse");
-        var showChar = 30;
+        var showChar = 188;
         var ellipsestext = "...";
         $(divs).each(function () {
-            var content = $(this).html();
+            var content = $(this).text();
             if (content.length > showChar) {
-                var c = content.substr(0, showChar);
+                var c = content.length;
                 var html = c + ' ' + ellipsestext + '  ';
                 $(this).html(html);
             }
@@ -31,6 +53,7 @@ jQuery(document).ready(function ($) {
             todayHighlight: true,
             autoclose: true
         }).on('changeDate', function () {
+            $(this).addClass('has-val');
             console.log($(this).val());
             plannedenddate.datepicker('setStartDate', new Date($(this).val())); //set PlannedStartDate as start date for PlannedDueDate and ActualStartDate
         });
@@ -39,6 +62,7 @@ jQuery(document).ready(function ($) {
             todayHighlight: true,
             autoclose: true
         }).on('changeDate', function () {
+            $(this).addClass('has-val');
             plannedstartdate.datepicker('setEndDate', new Date($(this).val())); //set PlannedDueDate as end date for PlannedStartDate
         });
         //Actual Start Date
@@ -46,6 +70,7 @@ jQuery(document).ready(function ($) {
             todayHighlight: true,
             autoclose: true
         }).on('changeDate', function () {
+            $(this).addClass('has-val');
             actualenddate.datepicker('setStartDate', new Date($(this).val())); //set ActualStartDate as start date for ActualEndDate
         });
         //Actual End Date
@@ -53,6 +78,7 @@ jQuery(document).ready(function ($) {
             todayHighlight: true,
             autoclose: true
         }).on('changeDate', function () {
+            $(this).addClass('has-val');
             actualstartdate.datepicker('setEndDate', new Date($(this).val())); //set ActualEndDate as end date for PlannedDueDate and ActualStartDate						
         });
         //Make all datepicker input fields as readonly
@@ -213,7 +239,7 @@ jQuery(document).ready(function ($) {
                             ctx.textAlign = 'center';
                             ctx.textBaseline = 'middle';
                             ctx.font = "40px";
-                            ctx.fontWeight = "600";
+                            ctx.fontWeight = "500";
                             ctx.fillText('No data to display', width / 2, height / 2);
                             ctx.restore();
                         }
@@ -223,4 +249,28 @@ jQuery(document).ready(function ($) {
             });
         }
     }
+    
+    $.toTimeStamp=function (date) {
+        if(date!="")
+        {
+            var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear(),
+             h = d.getHours(),
+            m = d.getMinutes(),
+            s = d.getSeconds();
+
+            if (month.length < 2) month = '0' + month;
+            if (day.length < 2) day = '0' + day;
+
+            return [year, month, day].join('-')+ " " +h+h+":"+m+m+":"+s+s;
+        }
+        else
+        {
+            return '';
+        }
+        
+    }
+    
 });

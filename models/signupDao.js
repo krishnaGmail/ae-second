@@ -1,33 +1,36 @@
 ﻿var db = require('../config/db');
 
 var signup = {
-
     getAllSignup: function (callback) {
-
         return db.exec("select * from MALASHREE.SIGNUP", callback);
+    },
+    getSignupbyEmail: function (email,callback) {
+        db.prepare("select * from MALASHREE.SIGNUP where email=?", function (err, statement) {
+            if (err) {
+                return console.error('Prepare error:', err);
+            }
+            return statement.exec([email], callback) ;
+        });
 
     },    
-    getDistinctEmail: function (signup, callback) {
-        console.log("inside Email service---"+signup);
+    getDistinctEmail: function (email, callback) {       
         db.prepare("select distinct email AS emaildata from MALASHREE.SIGNUP where email=?", function (err, statement) {
             if (err) {
                 return console.error('Prepare error:', err);
             }
-            return statement.exec([signup], callback) ;
+            return statement.exec([email], callback) ;
         });
     },
     addSignup: function (signup, callback) {
-        console.log("inside signup service");
-        // change 1st value of data array 
-        var data = [ 45,signup.email, signup.fname, "1", signup.lname, signup.pwd, signup.phone];
-            db.prepare('insert into MALASHREE.SIGNUP values(?,?,?,?,?,?,?)', function (err, statement) {
+        console.log("inside signup service");        
+        var data = [signup.email, signup.fname, "1", signup.lname, signup.pwd, signup.phone];
+            db.prepare('insert into MALASHREE.SIGNUP(email,firstname,flag,lastname,password,phoneno) values(?,?,?,?,?,?)', function (err, statement) {
             
                 if (err) {
                     return console.error('Prepare error:', err);
                 }
                 return statement.exec(data, callback) ;
-            });   
-      
+            });         
     },
     deleteRole: function (id, callback) {
         return db.query("delete from task where Id=?", [id], callback);

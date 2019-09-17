@@ -1,4 +1,8 @@
 jQuery(document).ready(function($){
+	$('[data-toggle="tooltip"]').click(function () {
+		$('[data-toggle="tooltip"]').tooltip("hide");
+
+	 });
 	var roleId=$(".roleId").val();
 	var contactId=$(".contactId").val();
 	
@@ -48,7 +52,7 @@ jQuery(document).ready(function($){
 			}
 		});
 	}	
-	permission();
+	//permission();
 	
 		
 		
@@ -68,10 +72,28 @@ jQuery(document).ready(function($){
 	
 	/* Formatting function for row details - modify as you need */
 	function format ( d ) {
+		var PLANSTARTDATE,PLANENDDATE;
+
+		if(d.PLANSTARTDATE=="" || d.PLANSTARTDATE === undefined || d.PLANSTARTDATE === null )
+		{
+			PLANSTARTDATE=" ";
+		}
+		else
+		{
+			PLANSTARTDATE=d.PLANSTARTDATE;
+		}
+		if(d.PLANENDDATE=="" || d.PLANENDDATE === undefined || d.PLANENDDATE === null )
+		{
+			PLANENDDATE=" ";
+		}
+		else
+		{
+			PLANENDDATE=d.PLANENDDATE;
+		}
 		return '<div class="row">'+
-		'<div class="col-sm-12 mb-2"><span class="fw-b">Created by: </span>'+d.createdby+'</div>'+
-		'<div class="col-sm-12 mb-2"><span class="fw-b">Planned Start Date: </span>'+d.planstartdate+'</div>'+
-		'<div class="col-sm-12 mb-2"><span class="fw-b">Planned End Date: </span>'+d.planenddate+'</div>'+
+		'<div class="col-sm-12 mb-2"><span class="fw-b">Created by: </span>'+d.CREATEDBY+'</div>'+
+		'<div class="col-sm-12 mb-2"><span class="fw-b">Planned Start Date: </span>'+PLANSTARTDATE+'</div>'+
+		'<div class="col-sm-12 mb-2"><span class="fw-b">Planned End Date: </span>'+PLANENDDATE+'</div>'+
 		'</div>';
 	}
 
@@ -82,14 +104,14 @@ jQuery(document).ready(function($){
 		"processing": "<i class='fa fa-spinner fa-spin fa-2x'></i>",
 		"loadingRecords": "<i class='fa fa-spinner fa-spin fa-2x'></i>",
 		},
-		"sAjaxSource": const_url+projectDataUrl,
+		"sAjaxSource":"/projects/Projectservice/admprojectlist",
 		"iDisplayLength": 10,
 		"bLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
 		"bFilter": true, //to show search
 		"deferRender": true,
 		"columns": [
 			{
-				"className":      'details-control',
+				"className":      'details-control ',
 				"orderable":      false,
 				"data":           null,
 				"defaultContent": ''
@@ -97,92 +119,92 @@ jQuery(document).ready(function($){
 			{ 	
 				data: null, 
 				render: function ( data, type, row ) {
-					return "<span class='wrapellipse' title='"+data.projectname+"'data-toggle='tooltip'>"+data.projectname+"</span>";
+					return "<span class='wrapellipse' title='"+data.PROJECTNAME+"'data-toggle='tooltip'>"+data.PROJECTNAME+"</span>";
 					
 				}
 			},
-			{ data: "priority",
+			{ data: "PRIORITY",
 			  "defaultContent": ''
 			},
 			{ 
 				data: null, 
 				render: function ( data, type, row ) {
-					if(data.statuscode == "sts001"){
-						return '<span class="badge badge-warning font-1xl">'+data.status+'</span><input type="hidden" name="txtStatusCode" id="txtStatusCode" value="'+data.statuscode+'">';
-					}else if(data.statuscode == "sts003"){
-						return '<span class="badge badge-info font-1xl">'+data.status+'</span><input type="hidden" name="txtStatusCode" id="txtStatusCode" value="'+data.statuscode+'">';
-					}else if(data.statuscode == "sts004"){
-						return '<span class="badge badge-dark font-1xl">'+data.status+'</span><input type="hidden" name="txtStatusCode" id="txtStatusCode" value="'+data.statuscode+'">';
-					}else if(data.statuscode == "sts005"){
-						return '<span class="badge badge-danger font-1xl">'+data.status+'</span><input type="hidden" name="txtStatusCode" id="txtStatusCode" value="'+data.statuscode+'">';
-					}else if(data.statuscode == "sts006"){
-						return '<span class="badge badge-secondary font-1xl">'+data.status+'</span><input type="hidden" name="txtStatusCode" id="txtStatusCode" value="'+data.statuscode+'">';
+					if(data.STATUS_IDFK == "1"){
+						return '<span class="badge badge-warning font-1xl">'+data.STATUS+'</span><input type="hidden" name="txtStatusCode" id="txtStatusCode" value="'+data.STATUS_IDFK+'">';
+					}else if(data.STATUS_IDFK == "2"){
+						return '<span class="badge badge-info font-1xl">'+data.STATUS+'</span><input type="hidden" name="txtStatusCode" id="txtStatusCode" value="'+data.STATUS_IDFK+'">';
+					}else if(data.STATUS_IDFK == "3"){
+						return '<span class="badge badge-dark font-1xl">'+data.STATUS+'</span><input type="hidden" name="txtStatusCode" id="txtStatusCode" value="'+data.STATUS_IDFK+'">';
+					}else if(data.STATUS_IDFK == "4"){
+						return '<span class="badge badge-danger font-1xl">'+data.STATUS+'</span><input type="hidden" name="txtStatusCode" id="txtStatusCode" value="'+data.STATUS_IDFK+'">';
 					}else {
 						return '';
 					}	
 				}
 			},
-			{ data: "actstartdate",
+			{ data: "ACTSTARTDATE",
 			  "defaultContent": ''
 			},
-			{ data: "actenddate",
+			{ data: "ACTENDDATE",
 			  "defaultContent": ''
 			},
 			{
-				data: "createdby", 
+				data: "CREATEDBY", 
 				"visible": false
 			},
 			{
 				data: null, 
 				render: function ( data, type, row ) {
 					var action;
-					if(prjEdit==-1 && prjDelete==-1)
-					{
+					// if(prjEdit==-1 && prjDelete==-1)
+					// {
 						
-						action=' ';
+					// 	action=' ';
 						
-					}
-					else if(prjEdit!=-1 && prjDelete!=-1)
-					{
-						action='<div class="dropdown for-addnew btn-action " style="cursor: pointer;">'+
-									'<span data-toggle="dropdown" aria-haspopup="true"  '+
-										'aria-expanded="false" title="Project Action"> <i '+
-										'class="fa fa-ellipsis-v" aria-hidden="true"></i>'+
-									'</span> '+
-									'<div class="add-menu dropdown-menu fz-14">'+
-										'<a href="javascript:void(0);" class="nav-link edit" title="Edit" data-id="'+data.DT_RowId+'"><span class="ti-pencil mr-2"></span>Edit</a><a href="javascript:void(0);" class="nav-link delete" title="Remove" data-id="'+data.DT_RowId+'"><span class="ti-trash mr-2"></span>Delete</a><a href="javascript:void(0);" class="nav-link archive" title="Archive" data-id="'+data.DT_RowId+'"><span class="ti-archive mr-2"></span>Archive</a>'+
-									'</div>'+
-								'</div>';
-					}
-					else if(prjDelete!=-1)
-					{
-						action='<div class="dropdown for-addnew btn-action " style="cursor: pointer;">'+
-									'<span data-toggle="dropdown" aria-haspopup="true"  '+
-										'aria-expanded="false" title="Project Action"> <i '+
-										'class="fa fa-ellipsis-v" aria-hidden="true"></i>'+
-									'</span> '+
-									'<div class="add-menu dropdown-menu fz-14">'+
-										'<a href="javascript:void(0);" class=" nav-link delete" title="Remove" data-id="'+data.DT_RowId+'"><span class="ti-trash mr-2"></span>Delete</a><a href="javascript:void(0);" class="nav-link archive" title="Archive" data-id="'+data.DT_RowId+'"><span class="ti-archive mr-2"></span>Archive</a>';
-									'</div>'+
-								'</div>';
-					}
-					else if(prjEdit!=-1)
-					{
-						action='<div class="dropdown for-addnew btn-action " style="cursor: pointer;">'+
-									'<span data-toggle="dropdown" aria-haspopup="true"  '+
-										'aria-expanded="false" title="Project Action"> <i '+
-										'class="fa fa-ellipsis-v" aria-hidden="true"></i>'+
-									'</span> '+
-									'<div class="add-menu dropdown-menu fz-14">'+
-										'<a href="javascript:void(0);" class="edit nav-link" title="Edit" data-id="'+data.DT_RowId+'"><span class="ti-pencil mr-2"></span>Edit</a><a href="javascript:void(0);" class="archive nav-link" title="Archive" data-id="'+data.DT_RowId+'"><span class="ti-archive mr-2"></span>Archive</a>';
-									'</div>'+
-								'</div>';
-					} 
+					// }
+					// else if(prjEdit!=-1 && prjDelete!=-1)
+					// {
+					// 	action='<div class="dropdown for-addnew btn-action " style="cursor: pointer;">'+
+					// 				'<span data-toggle="dropdown" aria-haspopup="true"  '+
+					// 					'aria-expanded="false" title="Project Action"> <i '+
+					// 					'class="fa fa-ellipsis-v" aria-hidden="true"></i>'+
+					// 				'</span> '+
+					// 				'<div class="add-menu dropdown-menu fz-14">'+
+					// 					'<a href="javascript:void(0);" class="nav-link edit" title="Edit" data-id="'+data.DT_RowId+'"><span class="ti-pencil mr-2"></span>Edit</a><a href="javascript:void(0);" class="nav-link delete" title="Remove" data-id="'+data.DT_RowId+'"><span class="ti-trash mr-2"></span>Delete</a><a href="javascript:void(0);" class="nav-link archive" title="Archive" data-id="'+data.DT_RowId+'"><span class="ti-archive mr-2"></span>Archive</a>'+
+					// 				'</div>'+
+					// 			'</div>';
+					// }
+					// else if(prjDelete!=-1)
+					// {
+					// 	action='<div class="dropdown for-addnew btn-action " style="cursor: pointer;">'+
+					// 				'<span data-toggle="dropdown" aria-haspopup="true"  '+
+					// 					'aria-expanded="false" title="Project Action"> <i '+
+					// 					'class="fa fa-ellipsis-v" aria-hidden="true"></i>'+
+					// 				'</span> '+
+					// 				'<div class="add-menu dropdown-menu fz-14">'+
+					// 					'<a href="javascript:void(0);" class=" nav-link delete" title="Remove" data-id="'+data.DT_RowId+'"><span class="ti-trash mr-2"></span>Delete</a><a href="javascript:void(0);" class="nav-link archive" title="Archive" data-id="'+data.DT_RowId+'"><span class="ti-archive mr-2"></span>Archive</a>';
+					// 				'</div>'+
+					// 			'</div>';
+					// }
+					// else if(prjEdit!=-1)
+					// {
+					// 	action='<div class="dropdown for-addnew btn-action " style="cursor: pointer;">'+
+					// 				'<span data-toggle="dropdown" aria-haspopup="true"  '+
+					// 					'aria-expanded="false" title="Project Action"> <i '+
+					// 					'class="fa fa-ellipsis-v" aria-hidden="true"></i>'+
+					// 				'</span> '+
+					// 				'<div class="add-menu dropdown-menu fz-14">'+
+					// 					'<a href="javascript:void(0);" class="edit nav-link" title="Edit" data-id="'+data.DT_RowId+'"><span class="ti-pencil mr-2"></span>Edit</a><a href="javascript:void(0);" class="archive nav-link" title="Archive" data-id="'+data.DT_RowId+'"><span class="ti-archive mr-2"></span>Archive</a>';
+					// 				'</div>'+
+					// 			'</div>';
+					// } 
 										
-					return action+'<input type="hidden" name="txtProjName" id="txtProjName" value="'+data.projectname+'"><input type="hidden" name="txtProjDescription" id="txtProjDescription" value="'+data.description+'"><input type="hidden" name="txtProjPlannedStartDate" id="txtProjPlannedStartDate" value="'+data.planstartdate+'"><input type="hidden" name="txtProjPlannedEndDate" id="txtProjPlannedEndDate" value="'+data.planenddate+'">';
+					// return action+'<input type="hidden" name="txtProjName" id="txtProjName" value="'+data.projectname+'"><input type="hidden" name="txtProjDescription" id="txtProjDescription" value="'+data.description+'"><input type="hidden" name="txtProjPlannedStartDate" id="txtProjPlannedStartDate" value="'+data.planstartdate+'"><input type="hidden" name="txtProjPlannedEndDate" id="txtProjPlannedEndDate" value="'+data.planenddate+'">';
+					return '';
 				}
 			}
 		],
+		
 		"drawCallback": function() {
 			ellipse();
 			$('[data-toggle="tooltip"]').tooltip();

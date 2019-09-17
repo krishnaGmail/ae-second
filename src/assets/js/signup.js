@@ -1,4 +1,5 @@
 ﻿jQuery(document).ready(function ($) {
+    $.hasClassadd();
     $.form_validator("signup_form");
     $(document).on('click', '#btnSubmit', function () {
         if (jQuery('#signup_form').valid()) {
@@ -15,7 +16,7 @@
                 "cnf_pwd": data[5]
             });
             $.ajax({
-                url: "/signup/create",
+                url: "/api/signup/create",
                 type: 'POST',
                 contentType: 'application/json',
                 data: dataJSON,
@@ -24,17 +25,20 @@
                 },
                 success: function (data, textStatus, jQxhr) {
                     if (data.success) {
+                        localStorage.clear();
+                        localStorage.setItem('userData', JSON.stringify(data.userData));
+                        localStorage.setItem('token', JSON.stringify(data.token));
                         location.href = '/dashboard';
                     }
                     else {
-                        toastr.options.positionClass = 'toast-bottom-right';
-                        toastr.error(data.msg);
+                        toast.error(data.msg);
                         $(".pj-loading-fa").html("");
                         $('#btnSubmit').prop('disabled', false);
                     }
                 },
                 error: function (jqXhr, textStatus, errorThrown) {
                     $('#btnSubmit').prop('disabled', false);
+                    $(".pj-loading-fa").html("");
                     alert('ERROR ' + errorThrown);
                 }
             });

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-signup',
@@ -7,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignupComponent implements OnInit {
 
+  title ="Sign Up | VSURVE";
   constructor() { }
 
   ngOnInit() {
-    var isIndex: boolean = true;
+    
   }
 
 }

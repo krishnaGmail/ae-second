@@ -1,4 +1,5 @@
 jQuery(document).ready(function($){
+    $.ellipse();
 	
     var defaultMem = $("input[name=defaultSessionMem]").val();
     var fetchedVal;
@@ -129,23 +130,9 @@ jQuery(document).ready(function($){
 			}
 		});
 	});
-	//var chartData=[5,7,2,1];
-    var date = "09/31/2019";
-    function formatDate(date) {
-        var d = new Date(date),
-            month = '' + (d.getMonth() + 1),
-            day = '' + d.getDate(),
-            year = d.getFullYear(),
-             h = d.getHours(),
-            m = d.getMinutes(),
-            s = d.getSeconds();
-
-        if (month.length < 2) month = '0' + month;
-        if (day.length < 2) day = '0' + day;
-
-        return [year, month, day].join('-')+ " " +h+h+":"+m+m+":"+s+s;
-    }
-    console.log(formatDate(date)); 
+	var chartData=[];
+	// remove after added ticket operation
+    $.ticket_chart(chartData);
 	  	
 	/*$.ajax({
 		url : const_url+"/TicketService/countdata/",
@@ -186,7 +173,7 @@ jQuery(document).ready(function($){
 		var d;
 		var date;
 		$.ajax({
-			url : const_url+"/ProjectService/recentlist/",
+			url : "/projects/Projectservice/recfiveprojectlist",
 			type : 'GET',
 			contentType : 'application/json',
 			beforeSend: function(){
@@ -194,58 +181,65 @@ jQuery(document).ready(function($){
 			},
 			success : function(data,textStatus,jQxhr) {
 				$("#dynamic-projects").empty();
-				$.ajax({
-					url : const_url+"/UserService/countdata/",
-					type : 'GET',
-					contentType : 'application/json',
-					success : function(data,textStatus,jQxhr) {
-						$.each(data,function(key,entry) {
-							var t_porj=$(".totalPrj-count").text();
-							var t_prjinprg=$(".count_prjinprg").text();
-							$(".totalPrj-count").text(parseInt(t_porj)+1);
-							//$(".count_prjinprg").text(parseInt(t_prjinprg)+1);
-							$(".totalUser-count").text(entry.users);
-						});
-					},
-					error: function( jqXhr, textStatus, errorThrown ){
-						alert( 'ERROR '+errorThrown );
-					}
-				});
-					if(data.data.length>0)
+				// $.ajax({
+				// 	url : const_url+"/UserService/countdata/",
+				// 	type : 'GET',
+				// 	contentType : 'application/json',
+				// 	success : function(data,textStatus,jQxhr) {
+				// 		$.each(data,function(key,entry) {
+				// 			var t_porj=$(".totalPrj-count").text();
+				// 			var t_prjinprg=$(".count_prjinprg").text();
+				// 			$(".totalPrj-count").text(parseInt(t_porj)+1);
+				// 			//$(".count_prjinprg").text(parseInt(t_prjinprg)+1);
+				// 			$(".totalUser-count").text(entry.users);
+				// 		});
+				// 	},
+				// 	error: function( jqXhr, textStatus, errorThrown ){
+				// 		alert( 'ERROR '+errorThrown );
+				// 	}
+				// });
+					if(data.length>0)
 					{
-						$.each(data.data,function(key,entry) {
-							if(entry.duedate=="Not Set" || entry.duedate=="" || entry.duedate === undefined || entry.duedate === null )
+						var i=0;
+						$.each(data,function(key,entry) {
+							
+							if(i<=1)
 							{
-								date='<p style="color: #d3d3d3;"><i>Not Set</i></p>';
-							}
-							else
-							{
-								date='<p class="project_date1">'+entry.duedate+'</p>';
-							}
-							$("#dynamic-projects").append('<div class="col-lg-4 col-md-4">'+
-								'<section class=" card">'+
-									'<a href="'+const_url+'/home/project/ProjectDashboard" >'+
-										'<div class="twt-feed">'+
-											'<div class="media">'+
-												'<div class="media-body">'+
-													'<h2 class="text-black display-6 wrapellipse"   title="'+entry.projectname+'"data-toggle="tooltip">'+entry.projectname+'</h2>'+
+								if(entry.DUEDATE=="Not Set" || entry.DUEDATE=="" || entry.DUEDATE === undefined || entry.DUEDATE === null )
+								{
+									date='<p style="color: #d3d3d3;"><i>Not Set</i></p>';
+								}
+								else
+								{
+									date='<p class="project_date1">'+entry.DUEDATE+'</p>';
+								}
+								$("#dynamic-projects").append('<div class="col-lg-4 col-md-4">'+
+									'<section class=" card">'+
+										'<a href="/projects" >'+
+											'<div class="twt-feed">'+
+												'<div class="media">'+
+													'<div class="media-body">'+
+														'<h2 class="text-black display-6 wrapellipse"   title="'+entry.PROJECTNAME+'"data-toggle="tooltip">'+entry.PROJECTNAME+'</h2>'+
+													'</div>'+
 												'</div>'+
 											'</div>'+
+										'</a>'+
+										'<div class="weather-category twt-category">'+
+											'<ul>'+
+												'<li class="active">'+
+													'<p class="project_date1">'+entry.TEAMCOUNT+'</p>'+
+													'Team'+
+												'</li>'+
+												'<li>'+date+
+													'Due Date'+
+												'</li>'+
+											'</ul>'+
 										'</div>'+
-									'</a>'+
-									'<div class="weather-category twt-category">'+
-										'<ul>'+
-											'<li class="active">'+
-												'<p class="project_date1">'+entry.contact_idfk+'</p>'+
-												'Team'+
-											'</li>'+
-											'<li>'+date+
-												'Due Date'+
-											'</li>'+
-										'</ul>'+
-									'</div>'+
-								'</section> '+                                
-							' </div>');
+									'</section> '+                                
+								' </div>');
+								i++;
+							}
+							
 						});
 					}
 					$("#dynamic-projects").append('<div class="col-lg-4 col-md-4">'+
@@ -261,9 +255,9 @@ jQuery(document).ready(function($){
 					  var rowCount = $('.tableproject table tbody tr').length;
 							$(".tableproject table").removeClass("d-none");
 							
-							 if(rowCount<3)
-							{
-								$(".tableproject table tbody").empty();
+							//  if(rowCount<3)
+							// {
+							// 	$(".tableproject table tbody").empty();
 								/*$.ajax({
 									url : const_url+"/ProjectService/recFivelist/",
 									type : 'GET',
@@ -299,45 +293,45 @@ jQuery(document).ready(function($){
 										alert( 'ERROR '+errorThrown );
 									}
 								});*/
-							}
-							else{
-									$(".tableproject table tbody").find("tr:gt(3)").remove();
-									var count=0;
-									$.each(data.data,function(key,entry) {
-										count++;
-										if(count<2)
-										{
-											console.log(count);
-											if(entry.duedate=="Not Set" || entry.duedate=="" || entry.duedate === undefined || entry.duedate === null )
+							//}
+							// else{
+							// 		$(".tableproject table tbody").find("tr:gt(3)").remove();
+							// 		var count=0;
+							// 		$.each(data.data,function(key,entry) {
+							// 			count++;
+							// 			if(count<2)
+							// 			{
+							// 				console.log(count);
+							// 				if(entry.duedate=="Not Set" || entry.duedate=="" || entry.duedate === undefined || entry.duedate === null )
 									
-											{
-												date='<p style="color: #d3d3d3;"><i>Not Set</i></p>';
+							// 				{
+							// 					date='<p style="color: #d3d3d3;"><i>Not Set</i></p>';
 												
-											}
-											else
-											{
-												date='<p class="project_date1">'+entry.duedate+'</p>';
-											}
+							// 				}
+							// 				else
+							// 				{
+							// 					date='<p class="project_date1">'+entry.duedate+'</p>';
+							// 				}
 											
-											$(".tableproject table tbody ").prepend('<tr>'+
-												'<td> <span class="name wrapellipse" style="text-transform: capitalize;" title="'+entry.projectname+'"data-toggle="tooltip">'+entry.projectname+'</span> </td>'+
-													'<td> <span class="product">'+entry.contact_idfk+'</span> </td>'+
-														'<td><span>'+date+'</span></td>'+
+							// 				$(".tableproject table tbody ").prepend('<tr>'+
+							// 					'<td> <span class="name wrapellipse" style="text-transform: capitalize;" title="'+entry.projectname+'"data-toggle="tooltip">'+entry.projectname+'</span> </td>'+
+							// 						'<td> <span class="product">'+entry.contact_idfk+'</span> </td>'+
+							// 							'<td><span>'+date+'</span></td>'+
 															
 														
 																					
-											' </tr>');
-											return true;
-										}	
-										else{
-											return false;
-										}
+							// 				' </tr>');
+							// 				return true;
+							// 			}	
+							// 			else{
+							// 				return false;
+							// 			}
 									
-								}); 
+							// 	}); 
 							
 							
-							} 
-					ellipse();
+							//} 
+					$.ellipse();
 					$('[data-toggle="tooltip"]').tooltip();
 				$('#addproject-details').modal('hide');		  
 			},
@@ -347,7 +341,7 @@ jQuery(document).ready(function($){
 		});
 	}
 	$(document).on( 'click', '.linkAddProject', function () {
-        $('.modal-container').load(const_url + "/home/project/AddProjectMod", function (result) {
+      
 
             $('#addproject-details').modal({ show: true });
 
@@ -355,51 +349,50 @@ jQuery(document).ready(function($){
 				width: 'auto',
 				placeholder: "Select"
             });
-
-			//Date
+			$.hasClassadd();
+			
 			$.datepickercal("txtPlannedStartDate", "txtPlannedDueDate", "txtActualStartDate", "txtActualEndDate");	
 
-            $.selectdata("txtAddMembers", defaultMem);
-
-			// Validate
-            $.form_validato("addproject_form");
+           // $.selectdata("txtAddMembers", defaultMem);
 			
-		});
+			// Validate
+			$.form_validator("addproject_form");
+			
+		
 	});
+	
 	//Add new Project
 	$(document).on( 'click', '#addProject_submit', function () {
 		if ($('#addproject_form').valid()) {
 			
 			 $('#addProject_submit').prop('disabled', true);
-			var projectname = $("#txtProjectName").val();
-			var description = $("#txtDescription").val();
-			var planstartdate = $("#txtPlannedStartDate").val();
-			var planenddate = $("#txtPlannedDueDate").val();
-			var actstartdate = $("#txtActualStartDate").val();
-			var actenddate = $("#txtActualEndDate").val();
-			var priority = $('#txtPriority').val();
-			var members = $('#txtAddMembers').val();
-			if(members)
-			{
-				members=members.toString();
-			}
-			else
-			{
-				members="";
-			}
+			
+			var field_ID = ["txtProjectName", "txtDescription","txtPlannedStartDate","txtPlannedDueDate","txtActualStartDate","txtActualEndDate","txtPriority"];
+			var data = $.getField_val(field_ID);
+			
+			
+			// if(data[7])
+			// {
+			// 	members=data[7].toString();
+			// }
+			// else
+			// {
+			// 	members="";
+			// }
 			var dataJSON = JSON.stringify(
 			{
-				"projectname": projectname,
-				"description": description,
-				"planstartdate": planstartdate,
-				"planenddate": planenddate,
-				"actstartdate": actstartdate,
-				"actenddate": actenddate,
-				"priority": priority,
-				"members":members
+				"projectname": data[0], 
+				"description": data[1],
+				"planstartdate": data[2],
+				"planenddate":data[3],
+				"actstartdate":data[4],
+				"actenddate":data[5],
+				"priority": data[6]
+				
 			});
+			console.log(dataJSON);
 			$.ajax({
-				url : const_url+"/ProjectService/addproject",
+				url : "projects/Projectservice/addproject",
 				type : 'POST',
 				contentType : 'application/json',
 				data : dataJSON,
@@ -413,10 +406,14 @@ jQuery(document).ready(function($){
 
 						}
 						 $('#addProject_submit').prop('disabled', false);
-						$.snackbar({content: "New project created successfully.", timeout: 5000});
+						 $('#addproject-details').modal('hide');
+						 toast.success("New project created successfully");
+						 
+						
 				},
 				error: function( jqXhr, textStatus, errorThrown ){
 					 $('#addProject_submit').prop('disabled', false);
+					 $(".pj-loading-fa").html(" ");
 					alert( 'ERROR '+errorThrown );
 				}
 			});

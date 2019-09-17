@@ -1,0 +1,114 @@
+<div class="modal fade" id="addproject-details" role="dialog" data-backdrop="static" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-slideout modal-lg" role="document">
+            <form name="addproject_form" id="addproject_form" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Project</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i class="fa fa-times-circle" aria-hidden="true" style="font-size:26px"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="tab" role="tabpanel">
+                        <ul class="nav nav-tabs" role="tablist" id="tabslist">
+                            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#project">Project</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#date">Date</a></li>
+                            <li class="nav-item d-none"><a class="nav-link" data-toggle="tab" href="#members">Members</a></li>
+                            <!--<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#advanced">Advanced</a></li>-->
+                        </ul>
+    
+                        <div class="tab-content">
+                            <div id="project" class="container tab-pane active">
+                                <br>
+                                <div class="form-group">
+                                    
+                                    <input type="text" class="form-control" name="txtProjectName" id="txtProjectName" data-rule-required="true">
+                                    <span class="place-holder">Project Name</span>
+                                </div>
+                                <div class="form-group">
+                                   
+                                    <textarea name="txtDescription" id="txtDescription" rows="3" class="form-control" data-rule-maxlength="1000"></textarea>
+                                    <span class="place-holder">Description</span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label for="txtPriority" class="select-placeholder">Priority</label>
+                                            <select name="txtPriority" id="txtPriority" class="form-control selectinput" data-rule-required="true">
+                                                <option value=""></option>
+                                                <option value="High">High</option>
+                                                <option value="Medium">Medium</option>
+                                                <option value="Low">Low</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">&nbsp;</div>
+                                </div>
+                            </div>
+                            <div id="date" class="container tab-pane fade">
+                                <br>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            
+                                           
+                                            <a class="input-tooltip" data-toggle="tooltip" title="Scheduled date for start of project"><i class="fa fa-info-circle info-tt"></i></a>
+                                            <input type="text" class="form-control" id="txtPlannedStartDate" name="txtPlannedStartDate" autocomplete="off">
+                                             <span class="place-holder">Planned Start Date</span>
+                                            <span class="fa fa-calendar datepickercal"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            
+                                            
+                                            <a class="input-tooltip" data-toggle="tooltip" title="Scheduled date for completion of project"><i class="fa fa-info-circle info-tt"></i></a>
+                                            <input type="text" class="form-control" id="txtPlannedDueDate" name="txtPlannedDueDate" autocomplete="off">
+                                            <span class="place-holder">Planned Due Date</span>
+                                            <span class="fa fa-calendar datepickercal"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                           
+                                            
+                                            <a class="input-tooltip" data-toggle="tooltip" title="Date on which project actually commences"><i class="fa fa-info-circle info-tt"></i></a>
+                                            <input type="text" class="form-control" id="txtActualStartDate" name="txtActualStartDate" autocomplete="off">
+                                            <span class="place-holder">Actual Start Date</span>
+                                            <span class="fa fa-calendar datepickercal"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                           
+                                            
+                                            <a class="input-tooltip" data-toggle="tooltip" title="Date on which project actually terminates"><i class="fa fa-info-circle info-tt"></i></a>
+                                            <input type="text" class="form-control" id="txtActualEndDate" name="txtActualEndDate" autocomplete="off">
+                                            <span class="place-holder">Actual End Date</span>
+                                            <span class="fa fa-calendar datepickercal"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button"
+                            class="btn btn-primary custom-btn btn-flat mb-1 mt-1" id="addProject_submit">
+                        Create
+                        Project<span class="pj-loading-fa ml-2"></span>
+                    </button>
+                    <button type="button" class="btn btn-secondary mr-auto"
+                            data-dismiss="modal">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    
+    
+    
+    

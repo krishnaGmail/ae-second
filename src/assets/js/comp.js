@@ -1,4 +1,5 @@
 jQuery(document).ready(function ($) {
+    $.hasClassadd();
     $('[data-toggle="tooltip"]').tooltip();
     $(".cmpError-msg").hide();
     $.form_validator("companydetails_form");
@@ -12,7 +13,7 @@ jQuery(document).ready(function ($) {
     });
     var dropdown = $('#txtCompanyType');
     dropdown.empty();
-    var url = "./assets/js/industryfetchjson.js";
+    var url = "src/assets/js/industryfetchjson.js";
     $.getJSON(url, function (data) {
         $.each(data, function (key, entry) {
             dropdown.append($('<option></option>').attr('value', entry.val).text(entry.name));
@@ -31,7 +32,7 @@ jQuery(document).ready(function ($) {
                 });
             console.log("cmp" + dataJSON);
             $.ajax({
-                url: "/company/create",
+                url: "/api/company/create",
                 type: 'POST',
                 contentType: 'application/json',
                 data: dataJSON,
@@ -40,6 +41,9 @@ jQuery(document).ready(function ($) {
                 },
                 success: function (data, textStatus, jQxhr) {
                     if (data.success) {
+                        localStorage.clear();
+                        localStorage.setItem('userData', JSON.stringify(data.userData));
+                        localStorage.setItem('token', JSON.stringify(data.token));
                         location.href = '/dashboard';
                     }
                     else {

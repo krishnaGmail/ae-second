@@ -1,18 +1,35 @@
 var express = require('express');
 var router = express.Router();
+var  jwt_verify= require('../models/jwt');
+var project = require('../models/projectDao');
 
-router.get('/', function (req, res, next) {
+var company=require('../models/companyDao');
+var sequence=require('../models/sequenceDao');
+var sf=require('../models/sharedfunctions');
 
-    res.render('home/project/ProjectDashboard');
 
+router.get('/getRecentFiveProjectList', jwt_verify.checkToken,function (req, res, next) 
+{
+    if(req.decoded.userData.domid)
+    {
+        project.getRecentFiveProject(req.decoded.userData.domid,function (err, rows) {
+            if (err) {
+                res.json(err);
+            }
+            else {
+                res.json(rows);
+            }
+    
+        });
+    }
+    else
+    {
+        rows=[];
+        res.json(rows);
+       
+    }
+    
 });
-
-router.get('/AddProjectMod', function (req, res, next) {
-
-    res.render('home/project/AddProjectMod');
-
-});
-
 
 module.exports = router;
 

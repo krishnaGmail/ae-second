@@ -39,15 +39,11 @@ jQuery(document).ready(function($){
 	var oTable = jQuery('#roletable').DataTable( {
 		"processing": true,
 		"language": 
-        {         
-            paginate: {
-                    previous: '<i class="fa fa-angle-double-left" aria-hidden="true"></i>',
-                next: '<i class="fa fa-angle-double-right" aria-hidden="true"></i>'
-            },
+		{          
 		"processing": "<i class='fa fa-spinner fa-spin fa-2x'></i>",
 		"loadingRecords": "<i class='fa fa-spinner fa-spin fa-2x'></i>",
 		},
-        "order": [[2, 'desc'], [0, 'asc']],
+		"order": [[ 2, 'desc' ], [ 0, 'asc' ]],
            
         
 		"sAjaxSource":"/roles/rolelist",
@@ -64,56 +60,56 @@ jQuery(document).ready(function($){
                     if (data.DEFAULTROLE == "Default"){
 						return '<span class="flat-color-1">('+data.DEFAULTROLE+')</span>';
 					}else{
-						var action;
+						var action="";
 						
-						if(tktEdit==-1 && tktDelete==-1)
-						{
-							action=' ';						
-						}
-						else if(tktEdit!=-1 && tktDelete!=-1)
-						{
-							action='<div class="dropdown for-addnew btn-action " style="cursor: pointer;">'+
-									'<span data-toggle="dropdown" aria-haspopup="true"  '+
-										'aria-expanded="false" title="Role Action"> <i '+
-										'class="fa fa-ellipsis-v" aria-hidden="true"></i>'+
-									'</span> '+
-									'<div class="add-menu dropdown-menu fz-14">'+
-										'<a href="javascript:void(0);" class="nav-link edit" title="Edit" data-id="'+data.DT_RowId+'"><span class="ti-pencil mr-2"></span>Edit</a> <a href="javascript:void(0);" class="nav-link delete" title="Remove" data-id="'+data.DT_RowId+'"><span class="ti-trash mr-2"></span>Delete</a><input type="hidden" name="txtProjectRole" id="txtProjectRole" value="'+data.projectrole+'"><input type="hidden" name="txtTicketRole" id="txtTicketRole" value="'+data.ticketrole+'"><input type="hidden" name="txtUserRole" id="txtUserRole" value="'+data.usersrole+'"><input type="hidden" name="txtReportRole" id="txtReportRole" value="'+data.reportrole+'"><input type="hidden" name="txtCollaborationRole" id="txtCollaborationRole" value="'+data.collaborationrole+'">'+
-									'</div>'+
-								'</div>';
-						}
-						else if(tktDelete!=-1)
-						{
-							action='<div class="dropdown for-addnew btn-action " style="cursor: pointer;">'+
-									'<span data-toggle="dropdown" aria-haspopup="true"  '+
-										'aria-expanded="false" title="Role Action"> <i '+
-										'class="fa fa-ellipsis-v" aria-hidden="true"></i>'+
-									'</span> '+
-									'<div class="add-menu dropdown-menu fz-14">'+
-										'<a href="javascript:void(0);" class="nav-link delete" title="Remove" data-id="'+data.DT_RowId+'"><span class="ti-trash mr-2"></span>Delete</a><input type="hidden" name="txtProjectRole" id="txtProjectRole" value="'+data.projectrole+'"><input type="hidden" name="txtTicketRole" id="txtTicketRole" value="'+data.ticketrole+'"><input type="hidden" name="txtUserRole" id="txtUserRole" value="'+data.usersrole+'"><input type="hidden" name="txtReportRole" id="txtReportRole" value="'+data.reportrole+'"><input type="hidden" name="txtCollaborationRole" id="txtCollaborationRole" value="'+data.collaborationrole+'">'+
-									'</div>'+
-								'</div>';
-						}
-						else if(tktEdit!=-1)
-						{
-							action='<div class="dropdown for-addnew btn-action " style="cursor: pointer;">'+
-									'<span data-toggle="dropdown" aria-haspopup="true"  '+
-										'aria-expanded="false" title="Role Action"> <i '+
-										'class="fa fa-ellipsis-v" aria-hidden="true"></i>'+
-									'</span> '+
-									'<div class="add-menu dropdown-menu fz-14">'+
-										'<a href="javascript:void(0);" class="nav-link edit" title="Edit" data-id="'+data.DT_RowId+'"><span class="ti-pencil mr-2"></span>Edit</a> <input type="hidden" name="txtProjectRole" id="txtProjectRole" value="'+data.projectrole+'"><input type="hidden" name="txtTicketRole" id="txtTicketRole" value="'+data.ticketrole+'"><input type="hidden" name="txtUserRole" id="txtUserRole" value="'+data.usersrole+'"><input type="hidden" name="txtReportRole" id="txtReportRole" value="'+data.reportrole+'"><input type="hidden" name="txtCollaborationRole" id="txtCollaborationRole" value="'+data.collaborationrole+'">'+
-									'</div>'+
-								'</div>';
-						}
+						// if(tktEdit==-1 && tktDelete==-1)
+						// {
+						// 	action=' ';						
+						// }
+						// else if(tktEdit!=-1 && tktDelete!=-1)
+						// {
+						// 	action='<div class="dropdown for-addnew btn-action " style="cursor: pointer;">'+
+						// 			'<span data-toggle="dropdown" aria-haspopup="true"  '+
+						// 				'aria-expanded="false" title="Role Action"> <i '+
+						// 				'class="fa fa-ellipsis-v" aria-hidden="true"></i>'+
+						// 			'</span> '+
+						// 			'<div class="add-menu dropdown-menu fz-14">'+
+						// 				'<a href="javascript:void(0);" class="nav-link edit" title="Edit" data-id="'+data.DT_RowId+'"><span class="ti-pencil mr-2"></span>Edit</a> <a href="javascript:void(0);" class="nav-link delete" title="Remove" data-id="'+data.DT_RowId+'"><span class="ti-trash mr-2"></span>Delete</a><input type="hidden" name="txtProjectRole" id="txtProjectRole" value="'+data.projectrole+'"><input type="hidden" name="txtTicketRole" id="txtTicketRole" value="'+data.ticketrole+'"><input type="hidden" name="txtUserRole" id="txtUserRole" value="'+data.usersrole+'"><input type="hidden" name="txtReportRole" id="txtReportRole" value="'+data.reportrole+'"><input type="hidden" name="txtCollaborationRole" id="txtCollaborationRole" value="'+data.collaborationrole+'">'+
+						// 			'</div>'+
+						// 		'</div>';
+						// }
+						// else if(tktDelete!=-1)
+						// {
+						// 	action='<div class="dropdown for-addnew btn-action " style="cursor: pointer;">'+
+						// 			'<span data-toggle="dropdown" aria-haspopup="true"  '+
+						// 				'aria-expanded="false" title="Role Action"> <i '+
+						// 				'class="fa fa-ellipsis-v" aria-hidden="true"></i>'+
+						// 			'</span> '+
+						// 			'<div class="add-menu dropdown-menu fz-14">'+
+						// 				'<a href="javascript:void(0);" class="nav-link delete" title="Remove" data-id="'+data.DT_RowId+'"><span class="ti-trash mr-2"></span>Delete</a><input type="hidden" name="txtProjectRole" id="txtProjectRole" value="'+data.projectrole+'"><input type="hidden" name="txtTicketRole" id="txtTicketRole" value="'+data.ticketrole+'"><input type="hidden" name="txtUserRole" id="txtUserRole" value="'+data.usersrole+'"><input type="hidden" name="txtReportRole" id="txtReportRole" value="'+data.reportrole+'"><input type="hidden" name="txtCollaborationRole" id="txtCollaborationRole" value="'+data.collaborationrole+'">'+
+						// 			'</div>'+
+						// 		'</div>';
+						// }
+						// else if(tktEdit!=-1)
+						// {
+						// 	action='<div class="dropdown for-addnew btn-action " style="cursor: pointer;">'+
+						// 			'<span data-toggle="dropdown" aria-haspopup="true"  '+
+						// 				'aria-expanded="false" title="Role Action"> <i '+
+						// 				'class="fa fa-ellipsis-v" aria-hidden="true"></i>'+
+						// 			'</span> '+
+						// 			'<div class="add-menu dropdown-menu fz-14">'+
+						// 				'<a href="javascript:void(0);" class="nav-link edit" title="Edit" data-id="'+data.DT_RowId+'"><span class="ti-pencil mr-2"></span>Edit</a> <input type="hidden" name="txtProjectRole" id="txtProjectRole" value="'+data.projectrole+'"><input type="hidden" name="txtTicketRole" id="txtTicketRole" value="'+data.ticketrole+'"><input type="hidden" name="txtUserRole" id="txtUserRole" value="'+data.usersrole+'"><input type="hidden" name="txtReportRole" id="txtReportRole" value="'+data.reportrole+'"><input type="hidden" name="txtCollaborationRole" id="txtCollaborationRole" value="'+data.collaborationrole+'">'+
+						// 			'</div>'+
+						// 		'</div>';
+						// }
 						return action;
 						}
 				}
 			}
 		],
         "drawCallback": function () {
-            $(".dataTables_paginate > .pagination").addClass("pagination-rounded");
-			//$('[data-toggle="tooltip"]').tooltip({trigger : 'hover'});
+           // $(".dataTables_paginate > .pagination").addClass("pagination-rounded");
+			$('[data-toggle="tooltip"]').tooltip({trigger : 'hover'});
 		  }  
 	});
    
@@ -124,34 +120,8 @@ jQuery(document).ready(function($){
            
                 
             
-            $('.form-control').each(function () {
-                $(this).on('blur', function () {
-                    if ($(this).val().trim() != "") {
-                        $(this).addClass('has-val');
-                    }
-                    else {
-                        $(this).removeClass('has-val');
-                    }
-                })
-            });
-			jQuery('#formAddNewRole').validate({
-				ignore: "",
-				errorClass : "input-error",
-				errorElement : 'div',
-				errorPlacement: function (error, element) {
-					if (element.attr("type") == "checkbox") {
-						error.insertBefore("ul.list-group");
-					}else{
-						error.insertAfter(element);
-					}
-				},
-				invalidHandler: function(e, validator){
-					if(validator.errorList.length){
-						$('#tabslist a[href="#' + jQuery(validator.errorList[0].element).closest(".tab-pane").attr('id') + '"]').tab('show');
-					}
-				}
-			});
-			
+			$.hasClassadd();
+			$.form_validator("formAddNewRole");
 			$('.success').on('change', function(e) {
 				$(this).checkboxChk();
 			});
@@ -186,15 +156,12 @@ jQuery(document).ready(function($){
 			
 			var dataJSON = JSON.stringify(
             {
-                "ROLEID": 10302,
-                "DEFAULTROLE": "",
                 "DESCRIPTION": description,
-                "ROLENAME": rolename,
-                "DOMAIN_IDFK": 100,
-                "Element": "Project",
+                "ROLENAME": rolename, 
                 "projectrole": projectrole.toString(),
                 "ticketrole": ticketrole.toString(),
-                "usersrole": usersrole.toString(),
+				"usersrole": usersrole.toString(),
+				"rolepermissions":rolepermissions.toString(),
                 "reportrole": reportrole.toString(),
 				"collaborationrole": collaborationrole.toString()				
 			});
@@ -211,7 +178,8 @@ jQuery(document).ready(function($){
 					oTable.ajax.reload();
 					$('#btnAddRoleDetails').prop('disabled', false);
 					$('#addnewrole-details').modal('hide');
-					$.snackbar({content: "New role added successfully.", timeout: 5000});
+					toast.success("New role added successfully.");
+					
 				},
 				error: function( jqXhr, textStatus, errorThrown ){
 					$('#btnAddRoleDetails').prop('disabled', false);

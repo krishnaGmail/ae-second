@@ -2950,7 +2950,7 @@ box-shadow:none;
         transition: all 0.4s;
     }
     .top-count-box .card .card-body:hover .stat-icon {
-        top: 5px;
+        top: 6px;
     }
 
 .top-count-box .card .card-body {
@@ -3566,7 +3566,7 @@ table.dataTable {
 table.dataTable {
    margin-bottom:20px !important;
     border: 1px solid #cccccc85;
-    border-radius: 10px;
+    
 }
 .pagination-rounded .page-link {
     border-radius: 30px !important;
@@ -3600,7 +3600,7 @@ table.dataTable {
 .input-tooltip {
     position: absolute;
     right: -5px;
-    bottom: 10px;
+    bottom: 8px;
 }
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
@@ -3614,7 +3614,52 @@ select:-webkit-autofill:focus {
   
     transition: background-color 5000s ease-in-out 0s;
 }
-
+.select-placeholder{
+ font-size: 12px;
+ color: #999999;
+}
+.select2-container--default.select2-container--focus .select2-selection--multiple {
+  border:0px;
+  border-bottom: 1px solid
+ 
+}
+.select2-container--default .select2-selection--multiple {
+  border:0px;
+  border-bottom: 1px solid #ced4da;
+  
+}
+.card-box{
+  border: 1px solid #ced4da;
+  box-shadow: 0 1px 5px 1px rgba(62,57,107,.07);
+  webkit-box-shadow: 0 1px 15px 1px rgba(62,57,107,.07);
+  border-radius: 5px;
+}
+.pull-up{
+  webkit-transition: all .25s ease;
+    -moz-transition: all .25s ease;
+    -o-transition: all .25s ease;
+    transition: all .25s ease;
+    
+}
+.pull-up:hover {
+  -webkit-transform: translateY(-4px) scale(1.02);
+  -moz-transform: translateY(-4px) scale(1.02);
+  -ms-transform: translateY(-4px) scale(1.02);
+  -o-transform: translateY(-4px) scale(1.02);
+  transform: translateY(0px) scale(1.02);
+  -webkit-box-shadow: 0 14px 24px rgba(62, 57, 107, .2);
+  box-shadow: 0 10px 20px rgba(62, 57, 107, .2)
+}
+.spin{
+  -webkit-animation: spin 2s linear infinite;
+  -moz-animation: spin 2s linear infinite;
+  -o-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
     /*----------------- Mobile Ui ----------------------------*/
     @media (max-width: 1680px) {
         .timeline li {

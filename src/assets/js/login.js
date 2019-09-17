@@ -1,4 +1,6 @@
 ﻿jQuery(document).ready(function ($) {
+   
+    $.hasClassadd();
     $.form_validator("login_form");
     $(document).on('click', '#btnSubmitLogin', function () {
         if (jQuery('#login_form').valid()) {
@@ -7,11 +9,12 @@
             var data = $.getField_val(field_ID);
             var dataJSON = JSON.stringify(
             {
+                
                 "email": data[0],
                 "pwd": data[1]
             });
             $.ajax({
-                url: "api/login/check",
+                url: "/api/login/check",
                 type: 'POST',
                 contentType: 'application/json',
                 data: dataJSON,
@@ -20,11 +23,14 @@
                 },
                 success: function (data, textStatus, jQxhr) {
                     if (data.success) {
+                        localStorage.clear();
+                        localStorage.setItem('userData', JSON.stringify(data.userData));
+                        localStorage.setItem('token', JSON.stringify(data.token));
                         location.href = '/dashboard';
                     }
                     else {
-                        toastr.options.positionClass = 'toast-bottom-right';
-                        toastr.error(data.msg);
+                        
+                        toast.error(data.msg);
                         $(".pj-loading-fa").html("");
                         $('#btnSubmitLogin').prop('disabled', false);
                     }
