@@ -156,7 +156,7 @@
                                             <div class="card-body d-flex justify-content-center pb-2"
                                                 style="height: 235px;">
                                                 <div class="align-self-center">
-                                                    <a class="linkAddProject" href="javascript:void(0);"
+                                                    <a class="linkAddProject" (click)="setParentPrjLoaded()" href="javascript:void(0);"
                                                         title="Add new project"><i
                                                         class="fa fa-plus-circle fa-4x"></i></a>
                                                 </div>
@@ -286,8 +286,9 @@
             <div class="clearfix"></div>
 
         </div>
-       
-        <div  *ngIf="userData.flag == 1" class="modal fade  animated bounceInLeft none-border"   id="company-details">
+
+        <button *ngIf="userData.flag==1" #compModal id="compModal"></button>
+        <div  class="modal fade  animated bounceInLeft none-border"   id="company-details">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -342,4 +343,4 @@
 <div class="modal-container">
     <app-add-project-modal *ngIf="parentLoaded">
     </app-add-project-modal>
-</div>
+</div> 
