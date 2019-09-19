@@ -12,8 +12,8 @@ import { Loginguard } from './guard/loginguard.service';
 
 const routes: Routes = [
  
-  { path:"login" ,component:LoginComponent },
-  { path:"signup" ,component:SignupComponent},
+  { path:"login" ,component:LoginComponent,canActivate: [Loginguard] },
+  { path:"signup" ,component:SignupComponent,canActivate: [Loginguard]},
   { path:"dashboard" ,component:DashboardComponent ,canActivate: [DashboardGuard], resolve: {
     recentFiveProjectList: ProjectFiveListService
   }},

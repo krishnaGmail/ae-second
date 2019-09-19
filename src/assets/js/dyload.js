@@ -1,4 +1,5 @@
 jQuery(document).ready(function($){
+	const token=JSON.parse(localStorage.getItem('token'));
     $.ellipse();
 	
     var defaultMem = $("input[name=defaultSessionMem]").val();
@@ -168,14 +169,18 @@ jQuery(document).ready(function($){
 		}
 	});*/
 	
-	function dynamicProj_display()
+	function dynamicProj_display() 
 	{
 		var d;
 		var date;
+		
 		$.ajax({
-			url : "/projects/Projectservice/recfiveprojectlist",
+			url : "/api/projects/Projectservice/recfiveprojectlist",
 			type : 'GET',
 			contentType : 'application/json',
+			headers: {
+				'Authorization':'Bearer '+ token,
+			},
 			beforeSend: function(){
 				$(".pj-loading-fa").html("<i class='fa fa-spinner fa-spin'></i>");
 			},
@@ -341,8 +346,7 @@ jQuery(document).ready(function($){
 		});
 	}
 	$(document).on( 'click', '.linkAddProject', function () {
-      
-
+		
             $('#addproject-details').modal({ show: true });
 
 			$('.selectinput').select2({
@@ -366,10 +370,9 @@ jQuery(document).ready(function($){
 		if ($('#addproject_form').valid()) {
 			
 			 $('#addProject_submit').prop('disabled', true);
-			
+			 const token=JSON.parse(localStorage.getItem('token'));
 			var field_ID = ["txtProjectName", "txtDescription","txtPlannedStartDate","txtPlannedDueDate","txtActualStartDate","txtActualEndDate","txtPriority"];
 			var data = $.getField_val(field_ID);
-			
 			
 			// if(data[7])
 			// {
@@ -390,22 +393,29 @@ jQuery(document).ready(function($){
 				"priority": data[6]
 				
 			});
-			console.log(dataJSON);
 			$.ajax({
-				url : "projects/Projectservice/addproject",
+				url : "/api/projects/Projectservice/addproject",
 				type : 'POST',
 				contentType : 'application/json',
 				data : dataJSON,
+				headers: {
+                    'Authorization':'Bearer '+ token,
+                },
 				beforeSend: function(){
 					$(".pj-loading-fa").html("<i class='fa fa-spinner fa-spin'></i>");
 				},
 				success : function(data,textStatus,jQxhr) {
+						$('#addproject_form')[0].reset();
+						$("input").focus();
+						$.hasClassadd();
 						dynamicProj_display();						
 						if($("#projecttable").length){
 							$('#projecttable').DataTable().ajax.reload();
 
 						}
+						$(".pj-loading-fa").html(" ");
 						 $('#addProject_submit').prop('disabled', false);
+						 $(".form-control").removeClass('has-val');
 						 $('#addproject-details').modal('hide');
 						 toast.success("New project created successfully");
 						 

@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
   }
   setChildLoaded()
   {
-    console.log("HC"+this.childLoaded);
+    
     this.childLoaded.emit(true);
    
   }

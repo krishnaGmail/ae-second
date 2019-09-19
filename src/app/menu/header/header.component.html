@@ -10,7 +10,7 @@
                 <a id="menuToggle" class="menutoggle" style="font-weight:700">
                     <i class="fa fa-bars" style="margin-right: 5px;"></i>
     
-                    {{description}}
+                    {{userData.description}}
     
                 </a>
     
@@ -30,7 +30,7 @@
     
                         <div class="add-menu dropdown-menu" aria-labelledby="addnew">
                             
-                            <a class="nav-link linkAddProject " (click)="setloadAddProject()" href="javascript:void(0);"><i class="fa fa-tasks"></i>Add Project</a>
+                            <a class="nav-link linkAddProject " (click)="setChildLoaded()" href="javascript:void(0);"><i class="fa fa-tasks"></i>Add Project</a>
                             <a class="nav-link linkAddTicket" href="javascript:void(0);"><i class="fa fa-ticket"></i>Add Ticket</a>
     
                             <a class="nav-link linkAddUser" href="javascript:void(0);"><i class="fa fa-users"></i>Invite Users</a>
@@ -70,7 +70,7 @@
                        
                         <a class="nav-link linkdomain-nav active"
                            href="javascript:void(0);" data-id="{{description}}">
-                            <i class="fa fa-folder"></i>{{description}}
+                            <i class="fa fa-folder"></i>{{userData.description}}
                         </a>
                                 
                         <div class="dropdown-divider"></div>

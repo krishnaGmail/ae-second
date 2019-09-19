@@ -37,10 +37,6 @@ router.post('/create', function (req, res, next) {
                         { expiresIn: '24h' // expires in 24 hours
                         }
                       );                         
-                        
-                          
-                    
-                   
                       res.status(200).send({ success: true , userData:userData, token:token});
                 });
             }

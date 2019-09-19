@@ -26,7 +26,7 @@ app.use(session({ secret: 'vsurve', saveUninitialized: false, resave: false }));
 app.use('/api/login', loginRouter);
 app.use('/api/signup', signupRouter);
 app.use('/api/company', companypRouter);
-app.use('/api/project', projectRouter);
+app.use('/api/projects', projectRouter);
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist/ae-second/index.html'));
 });

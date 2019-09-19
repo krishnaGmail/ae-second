@@ -25,6 +25,6 @@ export class DashboardService {
     return "krishna";
   }
   getRecentFiveProjectList(): Observable<any> {
-    return this.http.get<any>("/api/project/getRecentFiveProjectList");
+    return this.http.get<any>("/api/projects/getRecentFiveProjectList");
   }
 }

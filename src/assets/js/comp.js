@@ -1,25 +1,29 @@
 jQuery(document).ready(function ($) {
-    $.hasClassadd();
-    $('[data-toggle="tooltip"]').tooltip();
-    $(".cmpError-msg").hide();
-    $.form_validator("companydetails_form");
-    $('#company-details').modal({
-        backdrop: 'static',
-        keyboard: false,
-    });
-    $('.selectIndu').select2({
-        width: 'auto',
-        placeholder: "Select"
-    });
-    var dropdown = $('#txtCompanyType');
-    dropdown.empty();
-    var url = "src/assets/js/industryfetchjson.js";
-    $.getJSON(url, function (data) {
-        $.each(data, function (key, entry) {
-            dropdown.append($('<option></option>').attr('value', entry.val).text(entry.name));
-        })
-    });
+    $(document).on( 'click', '#compModal', function () {
+        $('#company-details').modal({ show: true , backdrop: 'static',
+        keyboard: false,});
+        $.hasClassadd();
+        $('[data-toggle="tooltip"]').tooltip();
+        $(".cmpError-msg").hide();
+        $.form_validator("companydetails_form");
+       
+        $('.selectIndu').select2({
+            width: 'auto',
+            placeholder: "Select"
+        });
+        var dropdown = $('#txtCompanyType');
+        dropdown.empty();
+        var url = "assets/js/industryfetchjson.js";
+        $.getJSON(url, function (data) {
+            $.each(data, function (key, entry) {
+                dropdown.append($('<option></option>').attr('value', entry.val).text(entry.name));
+            })
+        });
+    });   
+   
+    
     $(document).on('click', '#btnSubmit_cmp', function () {
+        const token=JSON.parse(localStorage.getItem('token'));
         if (jQuery('#companydetails_form').valid()) {
             $('#btnSubmit_cmp').prop('disabled', true);
             var field_ID = ["txtCompanyName", "txtDomainUrl", "txtCompanyType"];
@@ -30,12 +34,15 @@ jQuery(document).ready(function ($) {
                     "description": data[1],
                     "industrytype": data[2]
                 });
-            console.log("cmp" + dataJSON);
+           
             $.ajax({
                 url: "/api/company/create",
                 type: 'POST',
                 contentType: 'application/json',
                 data: dataJSON,
+                headers: {
+                    'Authorization':'Bearer '+ token,
+                },
                 beforeSend: function () {
                     $(".cmp-loading-fa").html("<i class='fa fa-spinner fa-spin' style='margin: 0px;padding:0px;font-size: 19px;'></i>");
                 },
